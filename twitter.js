@@ -1,90 +1,90 @@
-/**
- * This is the server that does everything. It serves the index.html web page.
- * It opens a streaming connection to Twitter and retrieves the tweets. It
- * publishes all of the geotagged tweets to a Socket.io socket.
- */
+const express = require('express'),
+      app = express(),
+      http = require('http').Server(app),
+      io = require('socket.io')(http);
 
-/**
- * EXPRESS BOILERPLATE GOES HERE
- */
-var express = require('express'),
-    app = express(),
-    http = require('http').Server(app);
+      path = require('path')
+      EventEmitter = require('events'),
 
-// Serve index.html at the root.
+      Twitter = require('twitter'),
+      credentials = require('./credentials.js'),
+
+      client = new Twitter(credentials),
+
+      query = process.argv[2] || 'pms, tampons, mentrual, menstruating, cramps',
+
+      util = require('util'),
+
+      geocoder = require('geocoder');
+
 app.get('/', function(req, res){
   res.sendFile(__dirname + '/index.html');
 });
 
-// Serve static files in the public directory.
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, 'public')));
 
-// Run on port 3000.
 http.listen(3000, function() {
   console.log('listening on 3000');
 });
 
-/**
- * Create a stupid EventEmitter so that we can decouple the Twitter listener
- * and the socket.io socket.
- */
-var EventEmitter = require('events'),
-    util = require('util');
-
-function TweetEmitter() {
+function TweetEmitter(){
   EventEmitter.call(this);
 }
+
 util.inherits(TweetEmitter, EventEmitter);
 
-var tweetEmitter = new TweetEmitter();
-
-/**
- * Here's all the socket.io stuff
- */
-
-var io = require('socket.io')(http);
+const tweetEmitter = new TweetEmitter();
 
 tweetEmitter.on('tweet', function(tweet) {
-  console.log(tweet);
+  console.log(tweet)
   io.emit('tweet', tweet);
 });
 
-// a helper function to average coordinate pairs
-function average(coordinates) {
-  var n = 0, lon = 0.0, lat = 0.0;
-  coordinates.forEach(function(latLongs) {
-    latLongs.forEach(function(latLong) {
-      lon += latLong[0];
-      lat += latLong[1];
-      n += 1;
-    })
-  });
-  return [lon / n, lat / n];
+tweetEmitter.on('tweetList', function(list) {
+  console.log(list)
+  io.emit('tweetList', list);
+});
+
+const emitTweet = (tweet, coordinates) => {
+ const tweetSmall = {
+      id: tweet.id_str,
+      user: tweet.user.screen_name,
+      text: tweet.text,
+      placeName: tweet.user.location,
+      latLong: coordinates,
+    }
+  tweetEmitter.emit('tweet', tweetSmall);
 }
 
-// Twitter stuff
-
-var Twitter = require('twitter'),
-    credentials = require('./credentials.js'),
-    client = new Twitter(credentials);
-
-var query = process.argv[2] || 'trump';
-
-client.stream('statuses/filter', {track: query}, function(stream) {
-  // Every time we receive a tweet...
-  stream.on('data', function(tweet) {
-    // ... that has the `place` field populated ...
-    if (tweet.place) {
-      // ... extract only the fields needed by the client ...
-      var tweetSmall = {
-        id: tweet.id_str,
-        user: tweet.user.screen_name,
-        text: tweet.text,
-        placeName: tweet.place.full_name,
-        latLong: average(tweet.place.bounding_box.coordinates),
-      }
-      // ... and notify the tweetEmitter.
-      tweetEmitter.emit('tweet', tweetSmall);
+client.stream('statuses/filter', {track: query, language: 'en'}, (stream) => {
+  stream.on('data', (tweet) => {
+    console.log()
+    if(tweet.user.location != null) {
+      const coordinates = geocoder.geocode(tweet.user.location, function ( err, data ) {
+        if (data.status !== 'ZERO_RESULTS'){
+          emitTweet(tweet, [data.results[0].geometry.location.lng, data.results[0].geometry.location.lat])
+        } 
+      });      
+    } else {
+      emitTweet(tweet, [ 26.3346979, -80.881233 ])
     }
   });
 });
+
+const searchQuery = {
+  q: '#pms', 
+  lang: 'en', 
+  result_type: 'mixed',
+  count: 10
+}
+
+client.get('search/tweets', searchQuery, (error, tweets, response) => {
+  const topTweets = tweets.statuses
+  tweetEmitter.emit('tweetList', topTweets);
+  console.log('top tweets')
+});
+
+
+
+
+

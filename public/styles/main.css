@@ -1,0 +1,193 @@
+html, body{
+  background: #fee7e5;
+  font-family: "Montserrat", Helvetica, Arial, sans-serif;
+  height: 100vh;
+  width: 100vw;
+  color: #0000EE;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+}
+
+.container{
+  margin: 0 auto;
+}
+
+.header{
+  position: fixed;
+  background: none;
+  width: 100vw;
+  clear: both;
+
+}
+
+.header h1{
+  margin: 20px;
+}
+
+.title {
+  position: absolute;
+  top: 35vh;
+  text-align: center;
+  width: 560px;
+  color: #0000EE;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+h1{
+  font-size: 18px;
+  color: #0000EE;
+}
+
+#logo {
+  font-size: 18px;
+  color: #0000EE;
+  float: left;
+}
+
+a {
+  text-decoration: none;
+  color: #0000EE;
+}
+
+button#about{
+  float: right;
+  font-size: 18px;
+  color: #0000EE;
+  text-transform: uppercase;
+  margin-right: 20px;
+  margin-top: 20px;
+  display: inline-block;
+  border: none;
+  background: none;
+}
+
+button#about:hover{
+  color: #D84315;
+  cursor: pointer;
+  transition: color 250ms;
+}
+
+#about-div {
+  visibility: hidden;
+  width: 100vw;
+  height: 100vh;
+  position: fixed;
+  background: rgba(255, 0, 0, 0.8);
+  z-index: 2;
+  text-align: left;
+}
+
+#about-div p{
+  margin: 10vh auto 0 auto;
+  font-size: 2em;
+  color: #fee7e5;
+  font-family: 'PT-Serif';
+  padding: 100px;
+}
+
+#close {
+  position: absolute;
+  right: 15vw;
+  top: 10vh;
+  background: none;
+  border: none;
+  font-size: 3em;
+  color: #fff;
+  font-family: sans-serif;
+  z-index: 30000;
+}
+
+#close:hover{
+  color: #D84315;
+  transition: color 250ms;
+  cursor: pointer;
+} 
+
+.showAbout{
+  display: block;
+}
+
+.tweet {
+  position: absolute;
+  left: 40px;
+  width: 480px;
+  text-align: center;
+  font-family: 'PT Serif';
+  font-size: 2em;
+}
+.tweet a.user{
+  font-size: 0.6em;
+  font-family: 'Montserrat';
+}
+
+.tweet .text:hover{
+  color: #D84315;
+  transition: color 250ms;
+}
+
+.tweet .user:hover{
+  color: #D84315;
+  transition: color 250ms;
+}
+
+#tweetList{
+  position: absolute;
+  width: 20vw;
+  right: 0;
+  bottom: 20px;
+  padding: 0 40px;
+  font-family: 'PT Serif';
+  font-size: 0.8em;
+  height: 150px;
+  overflow-y: scroll;
+}
+
+#tweetList div{
+  margin-bottom: 10px;
+}
+
+#tweetList h5{
+  font-family: 'Montserrat'; 
+}
+
+
+
+/* CSS LOADER */
+
+.spinner {
+  width: 100px;
+  height: 100px;
+  background-color: #D84315;
+  position: absolute;
+  top: 25vh;
+  left: 45.9vw;
+  border-radius: 100%;  
+  -webkit-animation: sk-scaleout 1.0s infinite ease-in-out;
+  animation: sk-scaleout 1.0s infinite ease-in-out;
+}
+
+@-webkit-keyframes sk-scaleout {
+  0% { -webkit-transform: scale(0) }
+  100% {
+    -webkit-transform: scale(1.0);
+    opacity: 0;
+  }
+}
+
+@keyframes sk-scaleout {
+  0% { 
+    -webkit-transform: scale(0);
+    transform: scale(0);
+  } 100% {
+    -webkit-transform: scale(1.0);
+    transform: scale(1.0);
+    opacity: 0;
+  }
+}
+
+.invisible {
+  display: none;
+}
