@@ -1,1 +1,1 @@
-web: node twitter.js
+web: node app.js
