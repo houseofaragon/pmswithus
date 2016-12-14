@@ -14,7 +14,7 @@ const express = require('express'),
       query = process.argv[2] || 'pms, tampons, mentrual, menstruating, cramps, periodsarenotaninsult',
 
       util = require('util'),
-
+      port = process.env.PORT || 8080
       geocoder = require('geocoder');
 
 app.get('/', function(req, res){
@@ -23,8 +23,8 @@ app.get('/', function(req, res){
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-http.listen(3000, function() {
-  console.log('listening on 3000');
+http.listen(port, function() {
+  console.log('listening on ' , port);
 });
 
 function TweetEmitter(){
