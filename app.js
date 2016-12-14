@@ -23,7 +23,7 @@ app.get('/', function(req, res){
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.listen('3000', function() {
+http.listen(3000, function() {
   console.log('listening on 3000');
 });
 

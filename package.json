@@ -10,11 +10,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "browserify": "^13.1.1",
     "express": "^4.13.4",
-    "geocoder": "^0.2.2",
     "socket.io": "^1.7.2",
-    "twitter": "^1.7.0",
-    "util": "^0.10.3"
+    "twitter": "^1.7.0"
   }
 }
