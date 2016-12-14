@@ -11,7 +11,7 @@ const express = require('express'),
 
       client = new Twitter(credentials),
 
-      query = process.argv[2] || 'pms, tampons, mentrual, menstruating, cramps',
+      query = process.argv[2] || 'pms, tampons, mentrual, menstruating, cramps, periodsarenotaninsult',
 
       util = require('util'),
 
@@ -23,7 +23,7 @@ app.get('/', function(req, res){
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-http.listen(3000, function() {
+app.listen('3000', function() {
   console.log('listening on 3000');
 });
 
@@ -36,12 +36,10 @@ util.inherits(TweetEmitter, EventEmitter);
 const tweetEmitter = new TweetEmitter();
 
 tweetEmitter.on('tweet', function(tweet) {
-  console.log(tweet)
   io.emit('tweet', tweet);
 });
 
 tweetEmitter.on('tweetList', function(list) {
-  console.log(list)
   io.emit('tweetList', list);
 });
 
@@ -58,13 +56,12 @@ const emitTweet = (tweet, coordinates) => {
 
 client.stream('statuses/filter', {track: query, language: 'en'}, (stream) => {
   stream.on('data', (tweet) => {
-    console.log()
     if(tweet.user.location != null) {
       const coordinates = geocoder.geocode(tweet.user.location, function ( err, data ) {
         if (data.status !== 'ZERO_RESULTS'){
           emitTweet(tweet, [data.results[0].geometry.location.lng, data.results[0].geometry.location.lat])
-        } 
-      });      
+        }
+      });
     } else {
       emitTweet(tweet, [ 26.3346979, -80.881233 ])
     }
@@ -72,8 +69,8 @@ client.stream('statuses/filter', {track: query, language: 'en'}, (stream) => {
 });
 
 const searchQuery = {
-  q: '#pms', 
-  lang: 'en', 
+  q: '#pms',
+  lang: 'en',
   result_type: 'mixed',
   count: 10
 }
@@ -81,8 +78,9 @@ const searchQuery = {
 client.get('search/tweets', searchQuery, (error, tweets, response) => {
   const topTweets = tweets.statuses
   tweetEmitter.emit('tweetList', topTweets);
-  console.log('top tweets')
 });
+
+
 
 
 

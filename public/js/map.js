@@ -94,14 +94,14 @@ function ready(error, world, names) {
       });
   });
 
-  function addTopTweets (tweet) { 
-    var tweetList = document.getElementById("tweetList"); 
-    var div = document.createElement("div"); 
-    var tweetText = document.createElement('a'); 
+  function addTopTweets (tweet) {
+    var tweetList = document.getElementById("tweetList");
+    var div = document.createElement("div");
+    var tweetText = document.createElement('a');
     tweetText.href = 'http://twitter.com/' + tweet.user + '/status/' + tweet.id,
     tweetText.innerHTML = '<strong>@' +tweet.user + ': </strong>' + tweet.text
     div.appendChild(tweetText);
-    tweetList.appendChild(div); 
+    tweetList.appendChild(div);
   }
 
   socket.on('tweetList', (list) => {
@@ -119,6 +119,5 @@ function showAbout() {
 }
 
 function closeAbout() {
-  console.log('close');
   document.getElementById("about-div").style.visibility = 'hidden';
 }
