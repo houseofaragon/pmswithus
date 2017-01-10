@@ -62,10 +62,17 @@ function ready(error, world, names) {
       tweet.text, '</a>', '</div></div>'
     ].join('');
   }
+    function showCSSLoader() {
+    var el = document.getElementById('loader');
+    if(el) {
+      el.className = 'spinner';
+    }
+  }
 
   function removeCSSLoader() {
     var el = document.getElementById('loader');
     if(el) {
+      console.log('hello')
       el.className += el.className ? ' invisible' : 'invisible';
     }
   }
@@ -92,6 +99,7 @@ function ready(error, world, names) {
           c.strokeStyle = "#D84315", c.fillStyle = "#D84315", c.beginPath(), c.arc(center[0], center[1], 5, 0, 2 * Math.PI, false), c.lineWidth = 3, c.fill(), c.stroke();
         };
       });
+      window.setTimeout(showCSSLoader(), 500)
   });
 
   function addTopTweets (tweet) {

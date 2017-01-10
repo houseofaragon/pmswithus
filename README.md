@@ -1,39 +1,42 @@
-# Tweets on a Globe!
+# Project
 
-Real-time visualization of geotagged tweets about a given topic, using d3, socket.io, and the Twitter API.
+Real-time visualization of geotagged tweets about #pms.
 
-Read all the gory details at:
+Built with d3 + socket.io + Twitter API.
 
-http://joelgrus.com/2016/02/27/trump-tweets-on-a-globe-aka-fun-with-d3-socketio-and-the-twitter-api/
+## Installation
 
-![tweets on a globe](https://raw.githubusercontent.com/joelgrus/twitter-globe/master/globe.gif)
+`run: npm install`
 
-(Props to Mike Bostock's <a href = "http://bl.ocks.org/mbostock/4183330">World Tour</a>,
- from which I appropriated liberally.)
+see package.json and webpack config if you have issues
 
-Run it yourself with your favorite search phrase. First install the dependencies:
+## Usage
 
-```bash
-$ npm install
-```
+`start: npm start`
 
-then create a `credentials.js` that looks like
+## Contributing
 
-```js
-module.exports = {
-  consumer_key: "...",
-  consumer_secret: "...",
-  access_token_key: "...",
-  access_token_secret: "..."
-};
-```
+1. Fork it!
+2. Create your feature branch: `git checkout -b my-new-feature`
+3. Commit your changes: `git commit -am 'Add some feature'`
+4. Push to the branch: `git push origin my-new-feature`
+5. Submit a pull request :D
 
-then start it running:
+## Data
 
-```bash
-$ node twitter.js "search phrase goes here"
-```
+Twiiter API
 
-and finally navigate your browser to `localhost:3000`.
+## History
 
-Put it up on a giant screen! It's strangely mesmerizing.
+This is a passion project that was created in response to Mike Pence's comments about menstruation.
+
+http://www.npr.org/sections/thetwo-way/2016/04/08/473518239/periods-as-protest-indiana-women-call-governor-to-talk-about-menstrual-cycles
+
+## Credits
+
+Designed & Developed by Karen C. Aragon
+
+Help from Inspired by http://joelgrus.com/2016/02/27/trump-tweets-on-a-globe-aka-fun-with-d3-socketio-and-the-twitter-api/
+
+
+
