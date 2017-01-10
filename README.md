@@ -36,7 +36,7 @@ http://www.npr.org/sections/thetwo-way/2016/04/08/473518239/periods-as-protest-i
 
 Designed & Developed by Karen C. Aragon
 
-Help from Inspired by http://joelgrus.com/2016/02/27/trump-tweets-on-a-globe-aka-fun-with-d3-socketio-and-the-twitter-api/
+Help from http://joelgrus.com/2016/02/27/trump-tweets-on-a-globe-aka-fun-with-d3-socketio-and-the-twitter-api/
 
 
 
