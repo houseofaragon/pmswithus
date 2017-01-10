@@ -104,7 +104,7 @@ button#about:hover{
   color: #D84315;
   transition: color 250ms;
   cursor: pointer;
-} 
+}
 
 .showAbout{
   display: block;
@@ -150,7 +150,7 @@ button#about:hover{
 }
 
 #tweetList h5{
-  font-family: 'Montserrat'; 
+  font-family: 'Montserrat';
 }
 
 
@@ -162,9 +162,9 @@ button#about:hover{
   height: 100px;
   background-color: #D84315;
   position: absolute;
-  top: 25vh;
-  left: 45.9vw;
-  border-radius: 100%;  
+  top: 26.4vh;
+  left: 46.5vw;
+  border-radius: 100%;
   -webkit-animation: sk-scaleout 1.0s infinite ease-in-out;
   animation: sk-scaleout 1.0s infinite ease-in-out;
 }
@@ -178,7 +178,7 @@ button#about:hover{
 }
 
 @keyframes sk-scaleout {
-  0% { 
+  0% {
     -webkit-transform: scale(0);
     transform: scale(0);
   } 100% {

@@ -62,19 +62,14 @@ function ready(error, world, names) {
       tweet.text, '</a>', '</div></div>'
     ].join('');
   }
-    function showCSSLoader() {
-    var el = document.getElementById('loader');
-    if(el) {
-      el.className = 'spinner';
-    }
-  }
 
   function removeCSSLoader() {
-    var el = document.getElementById('loader');
-    if(el) {
-      console.log('hello')
-      el.className += el.className ? ' invisible' : 'invisible';
-    }
+    setTimeout(function(){
+      var el = document.getElementById('loader');
+      if(el) {
+        el.className = el.className ? el.className +' invisible' : 'invisible';
+      }
+    }, 500);
   }
 
   var title = d3.select(".title");
@@ -82,6 +77,7 @@ function ready(error, world, names) {
   socket.on('tweet', function(tweet) {
     addTopTweets(tweet)
     removeCSSLoader()
+
     d3.transition()
       .duration(1250)
       .each("start", function() {
@@ -99,7 +95,12 @@ function ready(error, world, names) {
           c.strokeStyle = "#D84315", c.fillStyle = "#D84315", c.beginPath(), c.arc(center[0], center[1], 5, 0, 2 * Math.PI, false), c.lineWidth = 3, c.fill(), c.stroke();
         };
       });
-      window.setTimeout(showCSSLoader(), 500)
+    setTimeout(function(){
+      var el = document.getElementById('loader');
+      if(el) {
+        el.className = 'spinner';
+      }
+    },5000)
   });
 
   function addTopTweets (tweet) {
