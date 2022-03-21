@@ -11,6 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.13.4",
+    "geocoder": "^0.2.3",
     "socket.io": "^1.7.2",
     "twitter": "^1.7.0"
   }

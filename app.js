@@ -11,7 +11,7 @@ const express = require('express'),
 
       client = new Twitter(credentials),
 
-      query = process.argv[2] || 'pms, tampons, mentrual, menstruating, cramps, periodsarenotaninsult',
+      query = process.argv[2] || 'periods, pms, tampons, menstrual, menstruating, cramps, periodsarenotaninsult',
 
       util = require('util'),
       port = process.env.PORT || 8080
@@ -61,7 +61,10 @@ client.stream('statuses/filter', {track: query, language: 'en'}, (stream) => {
         if (data.status !== 'ZERO_RESULTS'){
           emitTweet(tweet, [data.results[0].geometry.location.lng, data.results[0].geometry.location.lat])
         }
-      });
+        if (err) {
+          console.log(err)
+        }
+      }, { key: "AIzaSyCnOOpVtI3csTIQu4Q_5myW-DAZRF12t6I" });
     } else {
       emitTweet(tweet, [ 26.3346979, -80.881233 ])
     }
@@ -79,10 +82,3 @@ client.get('search/tweets', searchQuery, (error, tweets, response) => {
   const topTweets = tweets.statuses
   tweetEmitter.emit('tweetList', topTweets);
 });
-
-
-
-
-
-
-
